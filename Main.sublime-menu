@@ -1,0 +1,16 @@
+[
+    {
+        "caption": "Todo",
+        "mnemonic": "T",
+        "id": "todo",
+        "children":
+        [
+            { "command": "due", "caption": "Set due date", "mnemonic": "U" },
+            { "command": "showdue", "caption": "Show due today", "mnemonic": "S" },
+            { "command": "done", "caption": "Mark as done", "mnemonic": "D" },
+            { "command": "newtodo", "caption": "New todo", "mnemonic": "A" },
+            { "command": "newtag", "caption": "Add new tag", "mnemonic": "N" },
+            { "command": "tag", "caption": "Add existing tag", "mnemonic": "T" }
+        ]
+    }
+]
