@@ -1,0 +1,8 @@
+[
+	{ "keys": ["ctrl+alt+t"], "command" : "tag"},
+	{ "keys": ["ctrl+alt+u"], "command" : "due"},
+	{ "keys": ["ctrl+alt+s"], "command" : "showdue"},
+	{ "keys": ["ctrl+alt+d"], "command" : "done"},
+	{ "keys": ["ctrl+alt+a"], "command" : "newtodo"},
+	{ "keys": ["ctrl+alt+n"], "command" : "newtag"}
+]
