@@ -41,7 +41,7 @@ class DoneListener(sublime_plugin.EventListener):
             if file_name.split('.')[-1] == FILE_EXTENSION:
                 self.tag_phantoms = sublime.PhantomSet(view, 'todo-tags')
                 view.erase_phantoms('todo-tags')
-                self.style_tags(view.find_all('\[.*?\]'))
+                self.style_tags(view.find_all(r'\[.*?\]'))
                 self.due_phantoms = sublime.PhantomSet(view, 'todo-due')
                 view.erase_phantoms('todo-due')
                 self.style_due_today(view)
@@ -59,7 +59,7 @@ class DoneListener(sublime_plugin.EventListener):
         self.tag_phantoms.update(phantoms)
 
     def style_due_today(self, view):
-        due_today_regions = view.find_all('\%due \d\d\d\d-\d\d-\d\d')
+        due_today_regions = view.find_all(r'\%due \d\d\d\d-\d\d-\d\d')
         html = HTML_STYLE_HEADER +\
             '<div class="due">●</div>' +\
             HTML_STYLE_FOOTER
@@ -96,26 +96,20 @@ class DoneCommand(sublime_plugin.TextCommand):
 
 class DueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        # select due date
         due = ['today', 'tomorrow', 'next week', 'next month']
-        self.view.show_popup_menu(due, self.add_tag)
-        if self.idx >= 0:
-            for region in self.view.sel():
-                if region.empty():  # no selection just a cursor
-                    self.view.insert(edit,
-                                     self.view.line(region).end(),
-                                     ' %due ' + self.get_due_date())
+        self.view.show_popup_menu(due, self.set_due)
 
-    def add_tag(self, idx):
-        self.idx = idx
+    def set_due(self, idx):
+        if idx >= 0:
+            self.view.run_command('insert', {"characters": ' %due ' + self.get_due_date(idx)})
 
-    def get_due_date(self):
+    def get_due_date(self, idx):
         due_date = date.today()
-        if self.idx == 1:
+        if idx == 1:
             due_date = due_date + timedelta(days=1)
-        elif self.idx == 2:
+        elif idx == 2:
             due_date = due_date + timedelta(days=7)
-        elif self.idx == 3:
+        elif idx == 3:
             due_date = due_date + timedelta(days=30)
         return due_date.isoformat()
 
@@ -123,16 +117,10 @@ class DueCommand(sublime_plugin.TextCommand):
 class TagCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         # init
-        self.tag_regions = self.view.find_all('\[.*?\]')
+        self.tag_regions = self.view.find_all(r'\[.*?\]')
         # select tag
-        tags = self.get_tags()
-        self.view.show_popup_menu(tags, self.add_tag)
-        if self.idx >= 0:
-            for region in self.view.sel():
-                if region.empty():  # no selection just a cursor
-                    self.view.insert(edit,
-                                     self.view.line(region).end(),
-                                     ' ' + tags[self.idx])
+        self.tags = self.get_tags()
+        self.view.show_popup_menu(self.tags, self.add_tag)
 
     def get_tags(self):
         tags = []
@@ -143,7 +131,8 @@ class TagCommand(sublime_plugin.TextCommand):
         return tags
 
     def add_tag(self, idx):
-        self.idx = idx
+        if idx >= 0:
+            self.view.run_command('insert', {"characters": ' ' + self.tags[idx]})
 
 
 class NewtagCommand(sublime_plugin.TextCommand):
@@ -175,7 +164,7 @@ class NewtodoCommand(sublime_plugin.TextCommand):
 class ShowdueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         today = date.today().isoformat()
-        self.due_today_regions = self.view.find_all('\%due ' + today)
+        self.due_today_regions = self.view.find_all(r'\%due ' + today)
         due_today = []
         for due_today_region in self.due_today_regions:
             due_today.append(
