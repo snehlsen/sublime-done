@@ -1,8 +1,8 @@
 [
-    { "caption": "Done: Add existing tag", "command": "tag" },
-    { "caption": "Done: Set due date", "command": "due" },
-    { "caption": "Done: Show due today", "command": "showdue" },
-    { "caption": "Done: Add new tag", "command": "newtag" },
-    { "caption": "Done: Add new todo", "command": "newtodo" },
-    { "caption": "Done: Mark as done", "command": "done"}
+    { "caption": "Done: Add existing tag", "command": "donetag" },
+    { "caption": "Done: Set due date", "command": "donedue" },
+    { "caption": "Done: Show due today", "command": "doneshowdue" },
+    { "caption": "Done: Add new tag", "command": "donenewtag" },
+    { "caption": "Done: Add new todo", "command": "donenewtodo" },
+    { "caption": "Done: Mark as done", "command": "donedone"}
 ]

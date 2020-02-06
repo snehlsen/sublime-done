@@ -75,7 +75,7 @@ class DoneListener(sublime_plugin.EventListener):
         self.due_phantoms.update(phantoms)
 
 
-class DoneCommand(sublime_plugin.TextCommand):
+class DonedoneCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         # find divider
         divider = self.view.find(DONE_DIVIDER, 0)
@@ -94,7 +94,7 @@ class DoneCommand(sublime_plugin.TextCommand):
                     self.view.erase(edit, erase_line)
 
 
-class DueCommand(sublime_plugin.TextCommand):
+class DonedueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         due = ['today', 'tomorrow', 'next week', 'next month']
         self.view.show_popup_menu(due, self.set_due)
@@ -114,7 +114,7 @@ class DueCommand(sublime_plugin.TextCommand):
         return due_date.isoformat()
 
 
-class TagCommand(sublime_plugin.TextCommand):
+class DonetagCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         # init
         self.tag_regions = self.view.find_all(r'\[.*?\]')
@@ -135,7 +135,7 @@ class TagCommand(sublime_plugin.TextCommand):
             self.view.run_command('insert', {"characters": ' ' + self.tags[idx]})
 
 
-class NewtagCommand(sublime_plugin.TextCommand):
+class DonenewtagCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.view.window().show_input_panel(
             'new tag', '',
@@ -145,7 +145,7 @@ class NewtagCommand(sublime_plugin.TextCommand):
         self.view.run_command('insert', {"characters": ' [' + text + ']'})
 
 
-class NewtodoCommand(sublime_plugin.TextCommand):
+class DonenewtodoCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         eols = []
         for region in self.view.sel():
@@ -161,7 +161,7 @@ class NewtodoCommand(sublime_plugin.TextCommand):
         self.view.run_command('insert', {"characters": '\n* ' + text})
 
 
-class ShowdueCommand(sublime_plugin.TextCommand):
+class DoneshowdueCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         today = date.today().isoformat()
         self.due_today_regions = self.view.find_all(r'\%due ' + today)

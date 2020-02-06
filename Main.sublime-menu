@@ -4,12 +4,12 @@
         "id": "todo",
         "children":
         [
-            { "command": "due", "caption": "Set due date"},
-            { "command": "showdue", "caption": "Show due today"},
-            { "command": "done", "caption": "Mark as done"},
-            { "command": "newtodo", "caption": "New todo"},
-            { "command": "newtag", "caption": "Add new tag"},
-            { "command": "tag", "caption": "Add existing tag"}
+            { "command": "donedue", "caption": "Set due date"},
+            { "command": "doneshowdue", "caption": "Show due today"},
+            { "command": "donedone", "caption": "Mark as done"},
+            { "command": "donenewtodo", "caption": "New todo"},
+            { "command": "donenewtag", "caption": "Add new tag"},
+            { "command": "donetag", "caption": "Add existing tag"}
         ]
     }
 ]
