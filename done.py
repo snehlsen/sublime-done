@@ -4,25 +4,25 @@ import sublime
 
 import sublime_plugin
 
-HTML_STYLE_HEADER = ('<body id="todo-phantom-style">'
-                     '    <style>'
-                     '        div.due {'
-                     '            background-color: red;'
-                     '            color: white;'
-                     '            padding: 2px;'
-                     '            border-radius: 10px; '
-                     '            font-family: sans-serif;'
-                     '            font-size: .8rem;'
-                     '        }'
-                     '        div.tag {'
-                     '            background-color: blue;'
-                     '            color: white;'
-                     '            padding: 2px;'
-                     '            border-radius: 10px; '
-                     '            font-family: sans-serif;'
-                     '            font-size: .8rem;'
-                     '        }'
-                     '    </style>')
+HTML_STYLE_HEADER = '''<body id="todo-phantom-style">
+                         <style>
+                             div.due {
+                                 background-color: red;
+                                 color: white;
+                                 padding: 2px;
+                                 border-radius: 10px; 
+                                 font-family: sans-serif;
+                                 font-size: .8rem;
+                             }
+                             div.tag {
+                                 background-color: blue;
+                                 color: white;
+                                 padding: 2px;
+                                 border-radius: 10px; 
+                                 font-family: sans-serif;
+                                 font-size: .8rem;
+                             }
+                         </style>'''
 HTML_STYLE_FOOTER = '</body>'
 
 DONE_DIVIDER = '==='
