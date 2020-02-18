@@ -3,7 +3,7 @@
 ### Done - a simple Todo list.
 ![Done](static/sublime.jpeg)
 
-### Prerequistes
+### Prerequisites
 * Works only on *.todo files. 
 * You need a **separator** between done and open tasks, default is **===**
 
