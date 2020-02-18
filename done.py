@@ -59,19 +59,21 @@ class DoneListener(sublime_plugin.EventListener):
         self.tag_phantoms.update(phantoms)
 
     def style_due_today(self, view):
+        divider = view.find(DONE_DIVIDER, 0)
         due_today_regions = view.find_all(r'\%due \d\d\d\d-\d\d-\d\d')
         html = HTML_STYLE_HEADER +\
             '<div class="due">●</div>' +\
             HTML_STYLE_FOOTER
         phantoms = []
         for due_today_region in due_today_regions:
-            date_parts = view.substr(due_today_region).split()[1].split('-')
-            due_date = date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
-            if due_date <= date.today():
-                p = sublime.Phantom(due_today_region,
-                                    html,
-                                    sublime.LAYOUT_INLINE)
-                phantoms.append(p)
+            if due_today_region.end() < divider.begin():
+                date_parts = view.substr(due_today_region).split()[1].split('-')
+                due_date = date(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]))
+                if due_date <= date.today():
+                    p = sublime.Phantom(due_today_region,
+                                        html,
+                                        sublime.LAYOUT_INLINE)
+                    phantoms.append(p)
         self.due_phantoms.update(phantoms)
 
 
