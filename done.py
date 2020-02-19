@@ -22,6 +22,14 @@ HTML_STYLE_HEADER = '''<body id="todo-phantom-style">
                                  font-family: sans-serif;
                                  font-size: .8rem;
                              }
+                             div.current {
+                                 background-color: lime;
+                                 color: black;
+                                 padding: 2px;
+                                 border-radius: 10px; 
+                                 font-family: sans-serif;
+                                 font-size: .8rem;
+                             }
                          </style>'''
 HTML_STYLE_FOOTER = '</body>'
 
@@ -45,6 +53,9 @@ class DoneListener(sublime_plugin.EventListener):
                 self.due_phantoms = sublime.PhantomSet(view, 'todo-due')
                 view.erase_phantoms('todo-due')
                 self.style_due_today(view)
+                self.current_phantoms = sublime.PhantomSet(view, 'todo-current')
+                view.erase_phantoms('todo-current')
+                self.style_current(view)
 
     def style_tags(self, tag_regions):
         phantoms = []
@@ -75,6 +86,21 @@ class DoneListener(sublime_plugin.EventListener):
                                         sublime.LAYOUT_INLINE)
                     phantoms.append(p)
         self.due_phantoms.update(phantoms)
+    
+    def style_current(self, view):
+        divider = view.find(DONE_DIVIDER, 0)
+        current_regions = view.find_all(r'\* .*? \%start \d\d\d\d-\d\d-\d\d')
+        html = HTML_STYLE_HEADER +\
+            '<div class="current">⇒</div>' +\
+            HTML_STYLE_FOOTER
+        phantoms = []
+        for current_region in current_regions:
+            if current_region.end() < divider.begin():
+                p = sublime.Phantom(current_region,
+                                        html,
+                                        sublime.LAYOUT_INLINE)
+                phantoms.append(p)
+        self.current_phantoms.update(phantoms)
 
 
 class DonedoneCommand(sublime_plugin.TextCommand):
