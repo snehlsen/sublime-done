@@ -9,7 +9,8 @@
             { "command": "donedone", "caption": "Mark as done"},
             { "command": "donenewtodo", "caption": "New todo"},
             { "command": "donenewtag", "caption": "Add new tag"},
-            { "command": "donetag", "caption": "Add existing tag"}
+            { "command": "donetag", "caption": "Add existing tag"},
+            { "command": "donebegintask", "caption": "Begin task"}
         ]
     }
 ]

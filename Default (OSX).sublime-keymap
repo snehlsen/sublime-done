@@ -4,5 +4,6 @@
 	{ "keys": ["ctrl+alt+s"], "command" : "doneshowdue"},
 	{ "keys": ["ctrl+alt+d"], "command" : "donedone"},
 	{ "keys": ["ctrl+alt+a"], "command" : "donenewtodo"},
-	{ "keys": ["ctrl+alt+n"], "command" : "donenewtag"}
+	{ "keys": ["ctrl+alt+n"], "command" : "donenewtag"},
+	{ "keys": ["ctrl+alt+b"], "command" : "donebegintask"}
 ]

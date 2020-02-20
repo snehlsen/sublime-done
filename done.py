@@ -203,3 +203,9 @@ class DoneshowdueCommand(sublime_plugin.TextCommand):
     def on_done(self, idx):
         if idx >= 0:
             self.view.sel().add(self.due_today_regions[idx].end())
+
+
+class DonebegintaskCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        start_date = date.today().isoformat()
+        self.view.run_command('insert', {"characters": r' %start ' + start_date})

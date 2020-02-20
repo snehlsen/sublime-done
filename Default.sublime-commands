@@ -4,5 +4,6 @@
     { "caption": "Done: Show due today", "command": "doneshowdue" },
     { "caption": "Done: Add new tag", "command": "donenewtag" },
     { "caption": "Done: Add new todo", "command": "donenewtodo" },
-    { "caption": "Done: Mark as done", "command": "donedone"}
+    { "caption": "Done: Mark as done", "command": "donedone"},
+    { "caption": "Done: Begin task", "command": "donebegintask"}
 ]
